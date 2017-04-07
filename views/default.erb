@@ -1,0 +1,70 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Guessing game</h2>
+    <p id='clue'>K-2S0 wants you to guess a number between 1 and 100!<br/></p>
+        <!-- Guess count goes here  -->
+    <input id='my-guess'>
+    <button class='button' id='send-guess'>Make guess</button>
+    <button class='button' id='new-game'>New Game</button>
+</body>
+<script>
+    $('#send-guess').hide();
+    $('#my-guess').hide();
+
+
+    var $correct;
+    var $guess_count;
+    function sendGuess() {
+        var guess = $('#my-guess').val();
+        $.ajax({
+         dataType: "json",
+         method: "POST",
+         url: "/guess",
+//          contentType: "application/json",
+         data: { guess: guess, correct_number: $correct, guess_count: $guess_count }
+     }).then(function(data) {
+          $guess_count = data.guess_count;
+          $("#clue").text(data.message);
+          if (data.done == "Finished") {
+            gameEnd();
+          }
+      });
+    }
+
+    function gameEnd() {
+      $('#send-guess').hide();
+      $('#my-guess').hide();
+    }
+
+    function newGame() {
+        $('#my-guess').hide();
+        $.ajax({
+         dataType: "json",
+         method: "POST",
+         url: "/new_game",
+//          contentType: "application/json",
+     }).then(function(data) {
+          $('#clue').text("K-2S0 wants you to guess a number between 1 and 100! Enter your guess below. ");
+         $('#my-guess').show();
+         $('#send-guess').show();
+       $correct = data.correct_number;
+       $guess_count = data.guess_count;
+     });
+    }
+
+    $('#send-guess').on('click', sendGuess);
+    $('#new-game').on('click', newGame);
+
+
+    $('#my-guess').keypress(function(e) {
+   if(e.which == 13) { sendGuess()
+
+   }
+});
+</script>
+</html>
