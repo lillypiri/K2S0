@@ -7,7 +7,7 @@
 <body>
     <h2>Guessing game</h2>
     <p id='clue'>K-2S0 wants you to guess a number between 1 and 100!<br/></p>
-        <!-- Guess count goes here  -->
+    <p id="guess-count"></p>
     <input id='my-guess'>
     <button class='button' id='send-guess'>Make guess</button>
     <button class='button' id='new-game'>New Game</button>
@@ -30,6 +30,7 @@
      }).then(function(data) {
           $guess_count = data.guess_count;
           $("#clue").text(data.message);
+          $("#guess-count").text("You have made " + $guess_count + " guesses.")
           if (data.done == "Finished") {
             gameEnd();
           }
@@ -37,6 +38,7 @@
     }
 
     function gameEnd() {
+        $('#guess-count').text(" ");
       $('#send-guess').hide();
       $('#my-guess').hide();
     }
