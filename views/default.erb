@@ -6,12 +6,15 @@
 </head>
 <body>
     <h2>Guessing game</h2>
-    <p id='clue'>K-2S0 wants you to guess a number between 1 and 100!<br/></p>
+    <p>K-2S0 wants you to guess a number between 1 and 100!<br/></p>
     <p id="guess-count"></p>
     <input id='my-guess'>
     <button class='button' id='send-guess'>Make guess</button>
     <button class='button' id='new-game'>New Game</button>
-</body>
+    <div class="robot">
+      <span id='clue'>Hello, let's play a game, puny human. Hahahah</span>
+    </div>
+
 <script>
     $('#send-guess').hide();
     $('#my-guess').hide();
@@ -51,7 +54,7 @@
          url: "/new_game",
 //          contentType: "application/json",
      }).then(function(data) {
-          $('#clue').text("K-2S0 wants you to guess a number between 1 and 100! Enter your guess below. ");
+          $('#clue').text("Make a guess!");
          $('#my-guess').show();
          $('#send-guess').show();
        $correct = data.correct_number;
@@ -69,4 +72,5 @@
    }
 });
 </script>
+</body>
 </html>

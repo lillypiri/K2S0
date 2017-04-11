@@ -16,6 +16,21 @@ h2 {
     color: purple;
 }
 
+.robot {
+    background: url(robot_speech_bubble.png) no-repeat top;
+    margin: 20px auto;
+    position: relative;
+    height: 600px;
+    width: 500px;
+}
+
+.robot span {
+    width: 140px;
+    position: absolute;
+    top: 24px;
+    left: 99px;
+    font-size: 12px;
+}
 
 .button {
     display: inline-block;
@@ -30,6 +45,7 @@ h2 {
     border: none;
     border-radius: 15px;
     box-shadow: 0 4px #999;
+    margin: 5px 5px 5px;
 }
 
 .button:hover {background-color: #3e8e41}
