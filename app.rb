@@ -12,34 +12,23 @@ end
 
 
 post '/guess' do
-  # { guess: params['guess']}.to_json
   guesses = params['guess_count'].to_i
+  correct = params['correct_number'].to_i
+  guess = params['guess']
   case
-  when params['guess'].to_i == params['correct_number'].to_i
-      #change message to congratulations message
-      # change button to 'new game' button
-      # hide the input
-      # change heading?
-      { message: "Yay! You guessed the number!", done: "Finished"}.to_json
-    #   erb :correct_guess, :locals => {:guess => params['guess'], :response => "good job!", :guesses => session[:guess_count]}
+  when guess.to_i == correct
+    { message: "Yay! You guessed the number!", done: "Finished"}.to_json
   when guesses >= 9
     { message: "oh noooooooos. You ran out of guesses!", done: "Finished"}.to_json
-    #   erb :failed, :locals => {:correct_number => session[:correct_number]}
-    when !is_a_number?(params['guess'])
-      # return a message saying you guessed dumbly
+    when !is_a_number?(guess)
       guesses += 1
-      { message: "That's not an integer, dummy!", guess_count: guesses}.to_json
-      # erb :check_guess, :locals => {:guess => params['guess'], :response => "not an integer, dummy!", :guesses => session[:guess_count]}
-    when params['guess'].to_i > params['correct_number'].to_i
-      # return 'too high'
+      { message: "#{guess} isn't an integer, dummy!", guess_count: guesses}.to_json
+    when guess.to_i > correct
       guesses += 1
-      { message: "Too high! Guess again!", guess_count: guesses}.to_json
-      # erb :check_guess, :locals => {:guess => params['guess'], :response => "too high!", :guesses => session[:guess_count]}
-    when params['guess'].to_i < params['correct_number'].to_i
-      # return 'too low'
+      { message: "#{guess} is too high! Guess again!", guess_count: guesses}.to_json
+    when guess.to_i < correct
       guesses += 1
-      { message: "Too low! Guess again!", guess_count: guesses}.to_json
-      # erb :check_guess, :locals => {:guess => params['guess'], :response => "too low!", :guesses => session[:guess_count]}
+      { message: "#{guess} is too low! Guess again!", guess_count: guesses}.to_json
   end
 end
 
