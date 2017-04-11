@@ -4,6 +4,7 @@ require 'JSON'
 
 configure do
   enable :sessions
+   set :session_secret, "p1nkfluffyun1cornsdanc1ngonra1nbows"
 end
 
 get '/' do
