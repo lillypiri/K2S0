@@ -32,6 +32,46 @@ h2 {
     font-size: 12px;
 }
 
+.left-eye {
+    position: absolute;
+    width: 10px;
+    height: 12px;
+    left: 265px;
+    top: 133px;
+    background: red;
+    border-radius: 100px;
+    box-shadow: 0 0 20px red;
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.right-eye {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 289px;
+    top: 133px;
+    background: red;
+    border-radius: 100px;
+    box-shadow: 0 0 20px red;
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .button {
     display: inline-block;
     padding: 8px 12px;
