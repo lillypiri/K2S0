@@ -35,6 +35,7 @@
      }).then(function(data) {
           $guess_count = data.guess_count;
           $("#clue").text(data.message);
+          $('#my-guess').val("");
           $("#guess-count").text("You have made " + $guess_count + " guesses.")
           if (data.done == "Finished") {
             gameEnd();
