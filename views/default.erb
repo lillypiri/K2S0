@@ -13,11 +13,13 @@
     <button class='button' id='new-game'>New Game</button>
     <div class="robot">
       <span id='clue'>Hello, let's play a game, puny human. Hahahah</span>
+      <div class='eye left-eye'></div>
+      <div class='eye right-eye'></div>
     </div>
-
 <script>
     $('#send-guess').hide();
     $('#my-guess').hide();
+    $('.eye').css('background-color', 'yellow').css('box-shadow', '0 0 20px yellow');
 
 
     var $correct;
@@ -36,6 +38,8 @@
           $("#guess-count").text("You have made " + $guess_count + " guesses.")
           if (data.done == "Finished") {
             gameEnd();
+          } else {
+            $('.eye').css('background-color', 'red').css('box-shadow', '0 0 20px red');
           }
       });
     }
@@ -44,21 +48,22 @@
         $('#guess-count').text(" ");
       $('#send-guess').hide();
       $('#my-guess').hide();
+      $('.eye').css('background-color', 'lime').css('box-shadow', '0 0 20px lime');
     }
 
     function newGame() {
-        $('#my-guess').hide();
-        $.ajax({
-         dataType: "json",
-         method: "POST",
-         url: "/new_game",
-//          contentType: "application/json",
-     }).then(function(data) {
-          $('#clue').text("Make a guess!");
-         $('#my-guess').show();
-         $('#send-guess').show();
-       $correct = data.correct_number;
-       $guess_count = data.guess_count;
+      $('#my-guess').hide();
+      $.ajax({
+        dataType: "json",
+        method: "POST",
+        url: "/new_game",
+      }).then(function(data) {
+        $('#clue').text("Make a guess!");
+        $('#my-guess').show();
+        $('#send-guess').show();
+        $correct = data.correct_number;
+        $guess_count = data.guess_count;
+        $('.eye').css('background-color', 'lime').css('box-shadow', '0 0 20px lime');
      });
     }
 
@@ -67,10 +72,10 @@
 
 
     $('#my-guess').keypress(function(e) {
-   if(e.which == 13) { sendGuess()
-
-   }
-});
+      if(e.which == 13) {
+        sendGuess();
+      }
+    });
 </script>
 </body>
 </html>
